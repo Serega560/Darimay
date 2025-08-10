@@ -7,6 +7,8 @@
   --color-electric-purple: #9900ff;
   --color-indigo: #6201a3;
   --color-bright-grey: #5b5e64;
+  --color-dodger-blue: #0069ff;
+  --color-quartz: #d6d6d7;
 
   // svg
   --color-summer-sky: #37aee2; // telegram
@@ -39,6 +41,7 @@ body {
   background-color: var(--color-default-black);
   color: var(--color-default-white);
   transition: color 0.4s, background-color 0.4s;
+  border: none;
 
   &:hover {
     cursor: pointer;

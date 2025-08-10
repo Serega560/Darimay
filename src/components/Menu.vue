@@ -1,41 +1,55 @@
 <script setup>
+import { useRouter, useRoute } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
 
 const menuItems = [
-  { label: 'Главная', href: '#index.html' },
-  { label: 'Каталог', href: '#catalog' },
-  { label: 'Отзывы', href: '#reviews' },
-  { label: 'O бренде', href: 'https://wa.me/79261283908' }
+  { label: 'Главная', action: () => router.push('/') },
+  { label: 'Каталог', action: goToCatalog },
+  { label: 'Отзывы', action: () => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' }) },
+  { label: 'O бренде', action: () => window.open('https://wa.me/79261283908', '_blank') }
 ]
-</script>
 
+function goToCatalog() {
+  if (route.path === '/') {
+    document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })
+  } else {
+    router.push('/').then(() => {
+      setTimeout(() => {
+        document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })
+      }, 300)
+    })
+  }
+}
+</script>
 
 <template>
   <nav class="menu">
     <transition name="menu">
-      <ul
-        class="menu__list">
+      <ul class="menu__list">
         <li
-          v-for="(item, index) in menuItems"
-          :key="index"
-          class="menu__item"
+            v-for="(item, index) in menuItems"
+            :key="index"
+            class="menu__item"
         >
-          <a
-            class="menu__link"
-            :href="item.href"
+          <button
+              class="menu__link"
+              @click="item.action"
           >
             {{ item.label }}
-          </a>
+          </button>
         </li>
       </ul>
     </transition>
   </nav>
 </template>
 
-
 <style scoped lang="scss">
 @use '@/assets/styles/media.scss' as *;
 
 .menu {
+
 
   .menu__list {
     display: flex;

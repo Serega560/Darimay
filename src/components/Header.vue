@@ -6,19 +6,19 @@ import Menu from '@/components/Menu.vue'
 
 <template>
   <div class="header">
-    <div class="container">
-      <div class="header__block">
+    <div class="header__block">
 
+      <div class="container">
         <div class="header-up">
           <Logo/>
           <Contacts/>
         </div>
-
-        <div class="header-down">
-          <Menu/>
-        </div>
-
       </div>
+
+      <div class="header-down">
+        <Menu/>
+      </div>
+
     </div>
   </div>
 </template>
@@ -34,10 +34,12 @@ import Menu from '@/components/Menu.vue'
   justify-content: space-between;
   background-color: var(--color-default-white);
 
+
   .header__block {
     display: flex;
     flex-direction: column;
     gap: 15px 0;
+    width: 100%;
 
     .header-up {
       align-items: center;
@@ -54,6 +56,9 @@ import Menu from '@/components/Menu.vue'
     .header-down {
       display: flex;
       justify-content: center;
+      border-bottom: 1px solid var(--color-quartz);
+      border-top: 1px solid var(--color-quartz);
+      width: 100%;
     }
   }
 }
