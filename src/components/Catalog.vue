@@ -25,12 +25,12 @@ import { creams } from '../data/creams.js'
                  :class="['catalog__img', { 'order-2': id % 2 === 1 }]"/>
           </picture>
           <div :class="['catalog__content', { 'catalog__content--reversed': id % 2 === 1 }]">
-            <div class="catalog__rating">
+            <a :href="cream.link" class="catalog__rating">
               <div class="catalog__rating-stars">{{ cream.rating }}
                 <Stars/>
               </div>
               <span>{{ cream.review }}</span>
-            </div>
+            </a>
             <h3 class="catalog__title-small">{{ cream.title }}</h3>
             <div class="catalog__subtitle">
               <p>{{ cream.subtitle }}</p>
@@ -106,9 +106,25 @@ import { creams } from '../data/creams.js'
         .catalog__rating {
           display: flex;
           flex-direction: column;
-          align-items: center;
+          align-items: flex-end;
 
-          .catalog__rating-stars,
+          &:hover {
+            color: var(--color-dodger-blue);
+
+            svg {
+              color: var(--color-dodger-blue);
+            }
+          }
+
+          .cream__review {
+            text-decoration: underline;
+          }
+
+          svg {
+            transition: color .4s;
+          }
+
+
           span {
             align-self: end;
             font-size: 16px;
