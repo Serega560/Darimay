@@ -1,11 +1,14 @@
 <script setup>
 import Telegram from '@/assets/icons/telegram.svg'
+
 </script>
 
 <template>
   <div class="contacts">
-    <a href="#">info@darimay.ru</a>
-    <a href="https://t.me/kbbbsdwfewgbhb">
+    <a :href="`https://mail.google.com/mail/?view=cm&fs=1&to=info@darimay.ru`" target="_blank">
+      info@darimay.ru
+    </a>
+    <a target="_blank" href="https://t.me/Ekaterrinnna">
       <Telegram class="contacts__telegram"/>
     </a>
   </div>
@@ -18,17 +21,13 @@ import Telegram from '@/assets/icons/telegram.svg'
 
 .contacts {
   display: flex;
-  align-items: center;
   gap: 0 16px;
   border-radius: 50%;
-  justify-self: flex-end;
 
   .contacts__telegram {
     width: 40px;
     height: 40px;
     border-radius: 50%;
   }
-
 }
-
 </style>

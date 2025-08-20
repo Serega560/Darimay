@@ -10,7 +10,7 @@ const modules = [Pagination]
 const creamItems =[
   {
     id: 1,
-    label: "The nature",
+    label: "Darimay",
     description: "Откройте силу растений и минералов — естественная забота о вашей коже.",
     img: "photo_all.png"
   },
@@ -39,6 +39,11 @@ const creamItems =[
   fallback: new URL(`../assets/img/${item.img}?width=400`, import.meta.url).href
 }))
 
+const scrollToCatalog = () => {
+  const el = document.getElementById('catalog')
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
 </script>
 
 <template>
@@ -64,15 +69,14 @@ const creamItems =[
               <img :data-src="creamItem.fallback" width="auto" height="416" alt="крем-новинка"/>
             </picture>
             <div class="hero__content">
-              <span>Новинка</span>
+<!--              <span>Новинка</span>-->
               <h2 class="hero__title">{{ creamItem.label }}</h2>
               <p class="hero__description">{{ creamItem.description }}</p>
-              <a class="hero__button button" href="#catalog">Каталог</a>
+              <a class="hero__button button" @click="scrollToCatalog">Каталог</a>
             </div>
           </div>
         </SwiperSlide>
 <!--        <div class="custom-swiper-pagination"></div>-->
-
       </Swiper>
 
     </div>

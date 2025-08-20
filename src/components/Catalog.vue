@@ -2,13 +2,24 @@
 import Ozon from '@/assets/icons/ozon.svg'
 import Stars from "@/assets/icons/stars.svg"
 import { useRouter } from 'vue-router'
+import { creams } from '../data/creams.js'
 
 const router = useRouter()
 
 function goToDetail(id) {
-  router.push(`/cream/${id}`)
+  // именованный переход — надёжнее
+  router.push({ name: 'CreamDetail', params: { id } })
+      // на всякий случай гарантируем прокрутку вверх (если router.scrollBehavior не сработает)
+      .then(() => {
+        // глобальный scroll
+        window.scrollTo(0, 0)
+      })
+      .catch((err) => {
+        // игнорируем NavigationDuplicated / прочие ошибки
+        // (можешь логировать при необходимости)
+        // console.warn(err)
+      })
 }
-import { creams } from '../data/creams.js'
 </script>
 
 <template>

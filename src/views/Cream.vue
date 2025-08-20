@@ -5,6 +5,7 @@ import {computed} from 'vue'
 import Stars from "@/assets/icons/stars.svg";
 import Ozon from "@/assets/icons/ozon.svg";
 import Product from "@/views/Product.vue";
+import RatingReviews from "@/views/RatingReviews.vue";
 
 const route = useRoute()
 const router = useRouter()
@@ -64,6 +65,7 @@ function goBack() {
   <div class="cream__main">
     <div class="container">
       <Product/>
+      <RatingReviews />
     </div>
   </div>
 </template>

@@ -10,8 +10,8 @@ import Menu from '@/components/Menu.vue'
 
       <div class="container">
         <div class="header-up">
-          <Logo/>
-          <Contacts/>
+          <Logo class="header__logo"/>
+          <Contacts class="header__contacts" />
         </div>
       </div>
 
@@ -50,6 +50,15 @@ import Menu from '@/components/Menu.vue'
 
       @include vp-767 {
         padding: 8px 0;
+      }
+
+      .header__logo {
+        margin-left: 225px;
+      }
+
+      .header__contacts {
+        align-items: center;
+        justify-self: flex-end;
       }
     }
 

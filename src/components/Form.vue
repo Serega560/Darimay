@@ -1,0 +1,271 @@
+<script setup>
+import {ref} from "vue";
+
+const WEB3FORMS_ACCESS_KEY = "95581d1d-968a-4174-9fa3-4005e5938a26";
+
+const name = ref("");
+const email = ref("");
+const phone = ref("");
+const comment = ref("");
+const loading = ref(false);
+
+function validateEmail(email) {
+  // Проверяем минимум наличие @ и точку после неё
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+function validatePhone(phone) {
+  // Формат +7 и ровно 10 цифр после
+  const re = /^\+7\d{10}$/;
+  return re.test(phone);
+}
+
+function onPhoneFocus() {
+  if (!phone.value) {
+    phone.value = "+7";
+  }
+}
+
+function onPhoneInput(event) {
+  let value = event.target.value;
+
+  if (value.startsWith("+")) {
+    // Оставляем + в начале, остальное цифры
+    value = "+" + value.slice(1).replace(/\D/g, "");
+  } else {
+    // Если без +, оставляем только цифры
+    value = value.replace(/\D/g, "");
+  }
+  phone.value = value;
+}
+
+async function sendForm() {
+  if (!email.value && !phone.value) {
+    alert("Пожалуйста, укажите Email или Телефон.");
+    return;
+  }
+
+  if (email.value && !validateEmail(email.value)) {
+    alert("Пожалуйста, введите корректный Email с символом '@'.");
+    return;
+  }
+
+  if (phone.value && !validatePhone(phone.value)) {
+    alert("Пожалуйста, введите корректный номер телефона в формате +7XXXXXXXXXX.");
+    return;
+  }
+
+  loading.value = true;
+
+  const payload = {
+    access_key: WEB3FORMS_ACCESS_KEY,
+    name: name.value,
+    email: email.value,
+    phone: phone.value,
+    message: comment.value
+  };
+
+  try {
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json();
+
+    if (result.success) {
+      alert("Заявка отправлена!");
+      name.value = "";
+      email.value = "";
+      phone.value = "";
+      comment.value = "";
+    } else {
+      alert("Ошибка при отправке: " + (result.message || "Неизвестная ошибка"));
+    }
+  } catch (error) {
+    alert("Ошибка сети или сервера: " + error.message);
+  } finally {
+    loading.value = false;
+  }
+}
+</script>
+
+<template>
+  <div class="form" id="form">
+    <div class="container">
+      <div class="form__block">
+        <div class="form__header">
+          <h2 class="form__title">Остались вопросы ?</h2>
+          <p class="form__description">Вы можете оставить вопрос и ответим на него в ближайшее время</p>
+        </div>
+        <form class="form__main" @submit.prevent="sendForm" id="form" method="POST">
+          <input type="text" v-model="name" placeholder="Имя" required>
+          <input
+              type="tel"
+              v-model="phone"
+              @focus="onPhoneFocus"
+              @input="onPhoneInput"
+              placeholder="Телефон"
+          />
+          <input type="email" v-model="email" placeholder="E-mail"/>
+          <textarea v-model="comment" rows="4" placeholder="Ваш вопрос"></textarea>
+          <div>
+            <input class="form__input form__input--checkbox _req" type="checkbox" id="formAgreement" checked>
+            <label class=" form__label form__label--data" for="formAgreement">
+                <span class="form__text-data">Я согласен с
+                  <a href="#">политикой обработки персональных данных</a>
+                </span>
+            </label>
+          </div>
+          <button class="button" type="submit" :disabled="loading">
+            {{ loading ? "Отправка..." : "Отправить" }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped lang="scss">
+@use '@/assets/styles/media.scss' as *;
+@use '@/assets/styles/container.scss' as *;
+
+.form {
+  padding: 33px 0 55px;
+
+  .form__block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 110px;
+
+    @include vp-767 {
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+
+    .form__header {
+      background: white;
+
+      @include vp-767 {
+        padding: 0;
+      }
+
+      .form__title {
+        font-size: 40px;
+        font-weight: 700;
+        margin-bottom: 20px;
+
+        @include vp-767 {
+        font-size: 32px;
+        }
+      }
+
+      .form__description {
+        font-size: 18px;
+
+        @include vp-767 {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .form__main {
+      background: white;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      input,
+      textarea {
+        padding: 8px 16px;
+        border: 1px solid #ccc;
+        font-size: 18px;
+        transition: all 0.2s;
+
+        &:focus {
+          outline: none;
+          border-color: var(--color-bright-grey);
+        }
+      }
+
+      textarea {
+        resize: none;
+        min-height: 122px;
+        margin-bottom: 10px;
+      }
+
+      .form__label--data {
+        display: flex;
+        flex-direction: row;
+        column-gap: 12px;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        margin-bottom: 10px;
+
+        &:before {
+          content: "";
+          align-self: flex-start;
+          display: flex;
+          align-items: center;
+          border: 1px solid var(--color-default-black);
+          background-color: white;
+          flex: 0 0 20px;
+          height: 20px;
+        }
+
+        &:after {
+          content: "";
+          width: 12px;
+          height: 11px;
+          position: absolute;
+          top: 5px;
+          left: 4px;
+          background-color: var(--color-default-black);
+          transition: transform 0.2s ease-in-out;
+          transform: scale(1);
+        }
+
+        .form__text-data {
+          font-size: 16px;
+          order: 1;
+          line-height: 16px;
+
+          a {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .form__input--checkbox {
+        display: none;
+      }
+
+      .form__input--checkbox:checked + .form__label--data:after {
+        transform: scale(0);
+      }
+
+      .button {
+        color: var(--color-default-white);
+        padding: 14px;
+        font-size: 18px;
+        border: none;
+
+        &:hover {
+          background: var(--color-bright-grey);
+        }
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+</style>

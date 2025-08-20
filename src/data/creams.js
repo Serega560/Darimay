@@ -13,6 +13,7 @@ export const creams = [
         rating: "4.9",
         review: "325 отзывов",
         imgFile: "photo_1.png",
+        imgDoc:"doc.dp.jpg",
         bgFile: "bg_photo_1.png",
         skinNeeds:"Крем подойдет всем типам кожи, обезвоженной, раздраженной, против борьбы с возрастными изменениями, " +
             "в период восстановления после пилингов.",
@@ -61,6 +62,7 @@ export const creams = [
         rating: "4.9",
         review: "325 отзывов",
         imgFile: "photo_2.png",
+        imgDoc:"doc.dc.jpg",
         bgFile: "bg_photo_2.png",
         skinNeeds:"Крем подойдет всем типам кожи, обезвоженной, раздраженной, против борьбы с возрастными изменениями, " +
             "в период восстановления после пилингов.",
@@ -111,6 +113,7 @@ export const creams = [
         rating: "4.9",
         review: "325 отзывов",
         imgFile: "photo_3.png",
+        imgDoc:"",
         bgFile: "bg_photo_3.png",
         skinNeeds:"Крем подойдет всем типам кожи,",
         compound:"Aqua, Acrylates Copolymer, Polyglyceryl-3 Cocoate, Sorbitan Stearate, Sodium Cocoyl Glutamate, " +
@@ -144,6 +147,7 @@ export const creams = [
     }
 ].map(item => {
     const img = new URL(`../assets/img/${item.imgFile}`, import.meta.url).href;
+    const imgDoc = new URL(`../assets/img/${item.imgDoc}`, import.meta.url).href;
     const bg = new URL(`../assets/img/${item.bgFile}`, import.meta.url).href;
     const webp1x = new URL(`../assets/img/${item.imgFile}?format=webp&width=400`, import.meta.url).href;
     const webp2x = new URL(`../assets/img/${item.imgFile}?format=webp&width=800`, import.meta.url).href;

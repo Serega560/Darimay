@@ -16,7 +16,6 @@ import Logo from '@/assets/img/logo.svg'
 .img {
   justify-self: center;
   font-size: 0;
-  margin-left: 225px;
 }
 
 </style>

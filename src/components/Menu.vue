@@ -1,33 +1,40 @@
 <script setup>
-import { useRouter, useRoute } from 'vue-router'
+import {useRouter, useRoute} from 'vue-router'
 
 const router = useRouter()
 const route = useRoute()
 
 const menuItems = [
-  { label: 'Главная', action: () => router.push('/') },
-  { label: 'Каталог', action: goToCatalog },
-  { label: 'Отзывы', action: () => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' }) },
-  { label: 'O бренде', action: () => window.open('https://wa.me/79261283908', '_blank') }
+  {label: 'Главная', action: () => router.push('/')},
+  {label: 'Каталог', action: goToCatalog},
+  {label: 'Отзывы', action: () => document.getElementById('reviews')?.scrollIntoView({behavior: 'smooth'})},
+  {label: 'O бренде', action: () => document.getElementById('brand')?.scrollIntoView({behavior: 'smooth'})}
 ]
 
 function goToCatalog() {
   if (route.path === '/') {
-    document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById('catalog')?.scrollIntoView({behavior: 'smooth'})
   } else {
     router.push('/').then(() => {
       setTimeout(() => {
-        document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })
+        document.getElementById('catalog')?.scrollIntoView({behavior: 'smooth'})
       }, 300)
     })
   }
 }
+
+defineProps({
+  inFooter: {
+    type: Boolean,
+    default: false
+  }
+})
 </script>
 
 <template>
   <nav class="menu">
     <transition name="menu">
-      <ul class="menu__list">
+      <ul class="menu__list" :class="{ 'menu__list--footer': inFooter }">
         <li
             v-for="(item, index) in menuItems"
             :key="index"
@@ -49,7 +56,6 @@ function goToCatalog() {
 @use '@/assets/styles/media.scss' as *;
 
 .menu {
-
 
   .menu__list {
     display: flex;
@@ -105,6 +111,25 @@ function goToCatalog() {
           color: var(--color-bright-grey);
         }
       }
+    }
+
+  }
+
+  .menu__list--footer {
+
+    .menu__link {
+      padding: 5px 7px;
+      font-size: 16px;
+
+      &:hover {
+        background-color: var(--color-default-white);
+        color: var(--color-default-black);
+      }
+    }
+
+    .menu__item:first-child .menu__link {
+      font-size: 18px;
+      font-weight: bold;
     }
   }
 }
