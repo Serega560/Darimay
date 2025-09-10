@@ -89,12 +89,24 @@ const getTruncatedReview = (text, id, limit = 100) => {
     text-align: center;
     font-size: 24px;
     margin-bottom: 20px;
+
+    @include vp-767 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
   }
 
   .reviews__list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0 18px;
+
+    @include vp-767 {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px 0;
+      margin-bottom: 2px;
+    }
   }
 
   .reviews__item {
@@ -105,9 +117,19 @@ const getTruncatedReview = (text, id, limit = 100) => {
     margin-bottom: 20px;
     min-height: 250px;
 
+    @include vp-767 {
+      padding: 9px 12px;
+      min-height: 115px;
+      margin-bottom: 0;
+    }
+
     .reviews__name {
       font-size: 24px;
       font-weight: 700;
+
+      @include vp-767 {
+        font-size: 14px;
+      }
     }
 
     .reviews__name-cream {
@@ -120,6 +142,11 @@ const getTruncatedReview = (text, id, limit = 100) => {
       &:hover {
         color: var(--color-dodger-blue);
         border-bottom: 1px solid var(--color-dodger-blue);
+
+        @include vp-767 {
+          color: inherit;
+          border-bottom: 1px solid var(--color-default-black);
+        }
       }
     }
 
@@ -129,17 +156,30 @@ const getTruncatedReview = (text, id, limit = 100) => {
       gap: 0 4px;
       font-size: 18px;
       line-height: 18px;
+
+      @include vp-767 {
+        font-size: 14px;
+        align-items: start;
+
+        svg {
+          height: 16px;
+        }
+      }
     }
 
     .reviews__review {
       font-size: 16px;
       line-height: 16px;
 
+      @include vp-767 {
+        font-size: 14px;
+      }
+
       a {
         display: flex;
         justify-content: end;
         font-size: 14px;
-        color: var(--color-jordy-blue);
+        color: var(--color-dodger-blue);
         text-decoration: none;
 
         &:hover {
@@ -157,9 +197,18 @@ const getTruncatedReview = (text, id, limit = 100) => {
     width: max-content;
     margin: 0 auto;
 
+    @include vp-767 {
+      font-size: 14px;
+    }
+
     &:hover {
       color: var(--color-dodger-blue);
       border-bottom: 1px solid var(--color-dodger-blue);
+
+      @include vp-767 {
+        color: var(--color-default-black);
+        border-bottom: 1px solid var(--color-default-black);
+      }
     }
   }
 }

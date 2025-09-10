@@ -15,7 +15,7 @@ import Telegram from '@/assets/icons/telegram.svg'
 
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use '@/assets/styles/media.scss' as *;
 @use '@/assets/styles/container.scss' as *;
 
@@ -27,7 +27,9 @@ import Telegram from '@/assets/icons/telegram.svg'
   .contacts__telegram {
     width: 40px;
     height: 40px;
+    display: block;
     border-radius: 50%;
+    color: var(--color-dodger-blue);
   }
 }
 </style>

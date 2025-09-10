@@ -3,6 +3,8 @@ import MainLayout from '@/layouts/MainLayout.vue'
 
 const Home  = () => import('@/views/Home.vue')
 const Cream = () => import('@/views/Cream.vue')
+const PrivacyPolicy = () => import('@/views/PrivacyPolicy.vue')
+const Declarations = () => import('@/views/Declarations.vue')
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -13,6 +15,8 @@ const router = createRouter({
             children: [
                 { path: '', name: 'Home', component: Home },
                 { path: 'cream/:id', name: 'CreamDetail', component: Cream },
+                { path: 'privacy', name: 'PrivacyPolicy', component: PrivacyPolicy },
+                { path: 'declarations', name: 'Declarations', component: Declarations },
             ],
         },
     ],

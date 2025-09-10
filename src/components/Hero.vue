@@ -7,7 +7,7 @@ import 'swiper/css/pagination'
 
 const modules = [Pagination]
 
-const creamItems =[
+const creamItems = [
   {
     id: 1,
     label: "Darimay",
@@ -41,7 +41,7 @@ const creamItems =[
 
 const scrollToCatalog = () => {
   const el = document.getElementById('catalog')
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'})
 }
 
 </script>
@@ -69,14 +69,14 @@ const scrollToCatalog = () => {
               <img :data-src="creamItem.fallback" width="auto" height="416" alt="крем-новинка"/>
             </picture>
             <div class="hero__content">
-<!--              <span>Новинка</span>-->
+              <!--              <span>Новинка</span>-->
               <h2 class="hero__title">{{ creamItem.label }}</h2>
               <p class="hero__description">{{ creamItem.description }}</p>
-              <a class="hero__button button" @click="scrollToCatalog">Каталог</a>
+              <a href="#" class="hero__button button" @click="scrollToCatalog">Каталог</a>
             </div>
           </div>
         </SwiperSlide>
-<!--        <div class="custom-swiper-pagination"></div>-->
+        <!--        <div class="custom-swiper-pagination"></div>-->
       </Swiper>
 
     </div>
@@ -92,16 +92,35 @@ const scrollToCatalog = () => {
   padding-top: 65px;
   padding-bottom: 80px;
 
+  @include vp-767 {
+    padding: 29px 0 23px;
+  }
+
   .hero__block {
     display: grid;
     grid-template-columns: 600px 1fr;
 
+    @include vp-767 {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+    }
+
     img {
       justify-self: center;
+
+      @include vp-767 {
+        width: 375px;
+        height: auto;
+      }
     }
 
     .hero__content {
       align-self: end;
+
+      @include vp-767 {
+        padding-top: 20px;
+      }
 
       span {
         font-size: 16px;
@@ -110,12 +129,20 @@ const scrollToCatalog = () => {
       .hero__title {
         font-size: 40px;
         font-weight: 700;
+
+        @include vp-767 {
+          font-size: 32px;
+        }
       }
 
       .hero__description {
         font-size: 18px;
         font-weight: 400;
         margin-bottom: 20px;
+
+        @include vp-767 {
+          font-size: 14px;
+        }
       }
 
       .button {
@@ -125,13 +152,19 @@ const scrollToCatalog = () => {
         color: var(--color-default-white);
         transition: color 0.4s, background-color 0.4s;
 
+        @include vp-767 {
+          padding: 12px 55px;
+          font-size: 14px;
+        }
+
         &:hover {
           cursor: pointer;
           color: var(--color-default-white);
           background-color: var(--color-bright-grey);
 
           @include vp-767 {
-            color: var(--color-bright-grey);
+            color: var(--color-default-white);
+            background-color: var(--color-default-black);
           }
         }
 

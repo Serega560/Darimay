@@ -49,16 +49,24 @@ import Menu from '@/components/Menu.vue'
       justify-content: center;
 
       @include vp-767 {
-        padding: 8px 0;
+        padding: 3px 0 0;
       }
 
       .header__logo {
         margin-left: 225px;
+
+        @include vp-767 {
+          margin: 0;
+        }
       }
 
       .header__contacts {
         align-items: center;
         justify-self: flex-end;
+
+        @include vp-767 {
+          display: none;
+        }
       }
     }
 

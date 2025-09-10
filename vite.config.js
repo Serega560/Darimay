@@ -14,7 +14,7 @@ export default defineConfig({
     vue(),
     vueJsx(),
     imagetools(),
-    svgLoader(),
+    svgLoader({ svgo: false }),
   ],
   base: './',
   resolve: {

@@ -26,7 +26,7 @@ const reviews = ref([
 </script>
 
 <template>
-  <div class="rating-reviews">
+  <div class="rating-reviews" id="rating-reviews">
     <h2 class="rating-reviews__title">Рейтинг и Отзывы</h2>
     <div class="rating-reviews__block">
       <div class="grade">
@@ -69,7 +69,7 @@ const reviews = ref([
   padding: 0 0 92px;
 
   @include vp-767 {
-    padding: 47px 0 9px;
+    padding: 0 0 9px;
   }
 
   .rating-reviews__block {
@@ -77,7 +77,16 @@ const reviews = ref([
     grid-template-columns: 350px 1fr;
     gap: 0 77px;
 
+    @include vp-767 {
+      display: flex;
+      flex-direction: column;
+    }
+
     .grade {
+
+      @include vp-767 {
+        margin-bottom: 20px;
+      }
 
       p {
         display: flex;
@@ -85,6 +94,20 @@ const reviews = ref([
         text-align: left;
         font-size: 16px;
         margin-bottom: 24px;
+
+        @include vp-767 {
+          font-size: 14px;
+          margin-bottom: 10px;
+          gap: 2px;
+        }
+      }
+
+      svg {
+
+        @include vp-767 {
+          width: 73px;
+          height: 16px;
+        }
       }
     }
 
@@ -93,6 +116,10 @@ const reviews = ref([
       p {
         margin-bottom: 20px;
         font-size: 16px;
+
+        @include vp-767 {
+          display: none;
+        }
       }
     }
   }
@@ -119,6 +146,10 @@ const reviews = ref([
     .rating-reviews__name {
       font-size: 24px;
       font-weight: 700;
+
+      @include vp-767 {
+        font-size: 16px;
+      }
     }
 
     .rating-reviews__name-cream {
@@ -131,6 +162,11 @@ const reviews = ref([
       &:hover {
         color: var(--color-dodger-blue);
         border-bottom: 1px solid var(--color-dodger-blue);
+
+        @include vp-767 {
+          color: var(--color-default-black);
+          border-bottom: 1px solid var(--color-default-black);
+        }
       }
     }
 
@@ -140,11 +176,27 @@ const reviews = ref([
       gap: 0 4px;
       font-size: 18px;
       line-height: 18px;
+
+      @include vp-767 {
+        font-size: 14px;
+        align-items: start;
+        gap: 0;
+
+        svg {
+          height: 16px;
+          width: 73px;
+        }
+      }
     }
 
     .rating-reviews__review {
       font-size: 16px;
       line-height: 16px;
+
+      @include vp-767 {
+        font-size: 14px;
+        line-height: 14px;
+      }
 
       a {
         display: flex;
@@ -167,9 +219,19 @@ const reviews = ref([
     border-bottom: 1px solid var(--color-default-black);
     width: max-content;
 
+    @include vp-767 {
+      font-size: 14px;
+      line-height: 14px;
+    }
+
     &:hover {
       color: var(--color-dodger-blue);
       border-bottom: 1px solid var(--color-dodger-blue);
+
+      @include vp-767 {
+        color: var(--color-default-black);
+        border-bottom: 1px solid var(--color-default-black);
+      }
     }
   }
 }

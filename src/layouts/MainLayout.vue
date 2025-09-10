@@ -4,6 +4,7 @@ import Form from '@/components/Form.vue'
 import MarketPlace from '@/components/MarketPlace.vue'
 import Brand from '@/components/Brand.vue'
 import Footer from '@/components/Footer.vue'
+import CacheManager from '@/components/Footer.vue'
 </script>
 
 <template>

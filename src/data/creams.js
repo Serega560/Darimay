@@ -13,6 +13,24 @@ export const creams = [
         rating: "4.9",
         review: "325 отзывов",
         imgFile: "photo_1.png",
+        imgFileMb: "photo_1mb.png",
+        gallery: [
+            {
+                fallback: new URL('../assets/img/photo_1.png', import.meta.url).href,
+                webp1x: new URL('../assets/img/photo_1.png?format=webp&width=400', import.meta.url).href,
+                webp2x: new URL('../assets/img/photo_1.png?format=webp&width=800', import.meta.url).href
+            },
+            {
+                fallback: new URL('../assets/img/photo_1mb.png', import.meta.url).href,
+                webp1x: new URL('../assets/img/photo_1mb.png?format=webp&width=400', import.meta.url).href,
+                webp2x: new URL('../assets/img/photo_1mb.png?format=webp&width=800', import.meta.url).href
+            },
+            {
+                fallback: new URL('../assets/img/doc_dp.jpg', import.meta.url).href,
+                webp1x: new URL('../assets/img/doc_dp.jpg?format=webp&width=400', import.meta.url).href,
+                webp2x: new URL('../assets/img/doc_dp.jpg?format=webp&width=800', import.meta.url).href
+            }
+        ],
         imgDoc:"doc.dp.jpg",
         bgFile: "bg_photo_1.png",
         skinNeeds:"Крем подойдет всем типам кожи, обезвоженной, раздраженной, против борьбы с возрастными изменениями, " +
@@ -62,6 +80,24 @@ export const creams = [
         rating: "4.9",
         review: "325 отзывов",
         imgFile: "photo_2.png",
+        imgFileMb: "photo_2mb.png",
+        gallery: [
+            {
+                fallback: new URL('../assets/img/photo_2.png', import.meta.url).href,
+                webp1x: new URL('../assets/img/photo_2.png?format=webp&width=400', import.meta.url).href,
+                webp2x: new URL('../assets/img/photo_2.png?format=webp&width=800', import.meta.url).href
+            },
+            {
+                fallback: new URL('../assets/img/photo_2mb.png', import.meta.url).href,
+                webp1x: new URL('../assets/img/photo_2mb.png?format=webp&width=400', import.meta.url).href,
+                webp2x: new URL('../assets/img/photo_2mb.png?format=webp&width=800', import.meta.url).href
+            },
+            {
+                fallback: new URL('../assets/img/doc_dc.jpg', import.meta.url).href,
+                webp1x: new URL('../assets/img/doc_dc.jpg?format=webp&width=400', import.meta.url).href,
+                webp2x: new URL('../assets/img/doc_dc.jpg?format=webp&width=800', import.meta.url).href
+            }
+        ],
         imgDoc:"doc.dc.jpg",
         bgFile: "bg_photo_2.png",
         skinNeeds:"Крем подойдет всем типам кожи, обезвоженной, раздраженной, против борьбы с возрастными изменениями, " +
@@ -113,7 +149,25 @@ export const creams = [
         rating: "4.9",
         review: "325 отзывов",
         imgFile: "photo_3.png",
-        imgDoc:"",
+        imgFileMb: "photo_3mb.png",
+        gallery: [
+            {
+                fallback: new URL('../assets/img/photo_3.png', import.meta.url).href,
+                webp1x: new URL('../assets/img/photo_3.png?format=webp&width=400', import.meta.url).href,
+                webp2x: new URL('../assets/img/photo_3.png?format=webp&width=800', import.meta.url).href
+            },
+            {
+                fallback: new URL('../assets/img/photo_3mb.png', import.meta.url).href,
+                webp1x: new URL('../assets/img/photo_3mb.png?format=webp&width=400', import.meta.url).href,
+                webp2x: new URL('../assets/img/photo_3mb.png?format=webp&width=800', import.meta.url).href
+            },
+            {
+                fallback: new URL('../assets/img/doc_du.jpg', import.meta.url).href,
+                webp1x: new URL('../assets/img/doc_du.jpg?format=webp&width=400', import.meta.url).href,
+                webp2x: new URL('../assets/img/doc_du.jpg?format=webp&width=800', import.meta.url).href
+            }
+        ],
+        imgDoc:"doc.du.jpg",
         bgFile: "bg_photo_3.png",
         skinNeeds:"Крем подойдет всем типам кожи,",
         compound:"Aqua, Acrylates Copolymer, Polyglyceryl-3 Cocoate, Sorbitan Stearate, Sodium Cocoyl Glutamate, " +
@@ -147,18 +201,38 @@ export const creams = [
     }
 ].map(item => {
     const img = new URL(`../assets/img/${item.imgFile}`, import.meta.url).href;
-    const imgDoc = new URL(`../assets/img/${item.imgDoc}`, import.meta.url).href;
+    const imgMb = new URL(`../assets/img/${item.imgFileMb}`, import.meta.url).href;
+    const imgDoc = item.imgDoc ? new URL(`../assets/img/${item.imgDoc}`, import.meta.url).href : '';
     const bg = new URL(`../assets/img/${item.bgFile}`, import.meta.url).href;
     const webp1x = new URL(`../assets/img/${item.imgFile}?format=webp&width=400`, import.meta.url).href;
     const webp2x = new URL(`../assets/img/${item.imgFile}?format=webp&width=800`, import.meta.url).href;
     const fallback = new URL(`../assets/img/${item.imgFile}?width=400`, import.meta.url).href;
+    const webpMb1x = new URL(`../assets/img/${item.imgFileMb}?format=webp&width=400`, import.meta.url).href;
+    const webpMb2x = new URL(`../assets/img/${item.imgFileMb}?format=webp&width=800`, import.meta.url).href;
+    const fallbackMb = new URL(`../assets/img/${item.imgFileMb}?width=400`, import.meta.url).href;
+
+    // Оставляем gallery как массив объектов
+    const gallery = item.gallery
+        .filter(img => img) // убираем пустые
+        .map(imgObj => ({
+            fallback: imgObj.fallback,
+            webp1x: imgObj.webp1x,
+            webp2x: imgObj.webp2x,
+            title: imgObj.title || item.title
+        }));
 
     return {
         ...item,
         img,
+        imgMb,
+        imgDoc,
         bg,
         webp1x,
         webp2x,
-        fallback
+        fallback,
+        webpMb1x,
+        webpMb2x,
+        fallbackMb,
+        gallery
     };
 });

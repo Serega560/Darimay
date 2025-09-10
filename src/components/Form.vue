@@ -100,7 +100,7 @@ async function sendForm() {
       <div class="form__block">
         <div class="form__header">
           <h2 class="form__title">Остались вопросы ?</h2>
-          <p class="form__description">Вы можете оставить вопрос и ответим на него в ближайшее время</p>
+          <p class="form__description">Вы можете оставить вопрос и мы ответим на него в ближайшее время.</p>
         </div>
         <form class="form__main" @submit.prevent="sendForm" id="form" method="POST">
           <input type="text" v-model="name" placeholder="Имя" required>
@@ -116,9 +116,11 @@ async function sendForm() {
           <div>
             <input class="form__input form__input--checkbox _req" type="checkbox" id="formAgreement" checked>
             <label class=" form__label form__label--data" for="formAgreement">
-                <span class="form__text-data">Я согласен с
-                  <a href="#">политикой обработки персональных данных</a>
-                </span>
+                <p class="form__text-data">Я&nbsp;согласен с
+                  <router-link :to="{ name: 'PrivacyPolicy' }" class="footer__confidentiality">
+                    политикой обработки персональных данных
+                  </router-link>
+                </p>
             </label>
           </div>
           <button class="button" type="submit" :disabled="loading">
@@ -136,6 +138,10 @@ async function sendForm() {
 
 .form {
   padding: 33px 0 55px;
+
+  @include vp-767 {
+    padding-bottom: 33px;
+  }
 
   .form__block {
     display: grid;
@@ -190,6 +196,10 @@ async function sendForm() {
           outline: none;
           border-color: var(--color-bright-grey);
         }
+
+        &::placeholder {
+          font-size: 14px;
+        }
       }
 
       textarea {
@@ -216,6 +226,11 @@ async function sendForm() {
           background-color: white;
           flex: 0 0 20px;
           height: 20px;
+
+          @include vp-767 {
+            height: 17px;
+            flex: 0 0 17px;
+          }
         }
 
         &:after {
@@ -228,12 +243,23 @@ async function sendForm() {
           background-color: var(--color-default-black);
           transition: transform 0.2s ease-in-out;
           transform: scale(1);
+
+          @include vp-767 {
+            width: 9px;
+            height: 9px;
+            top: 4px;
+            left: 4px;
+          }
         }
 
         .form__text-data {
           font-size: 16px;
           order: 1;
           line-height: 16px;
+
+          @include vp-767 {
+            font-size: 14px;
+          }
 
           a {
             text-decoration: underline;
@@ -254,6 +280,11 @@ async function sendForm() {
         padding: 14px;
         font-size: 18px;
         border: none;
+
+        @include vp-767 {
+          padding: 9px 40px;
+          width: 100%;
+        }
 
         &:hover {
           background: var(--color-bright-grey);

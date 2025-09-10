@@ -7,9 +7,29 @@ const route = useRoute()
 const menuItems = [
   {label: 'Главная', action: () => router.push('/')},
   {label: 'Каталог', action: goToCatalog},
-  {label: 'Отзывы', action: () => document.getElementById('reviews')?.scrollIntoView({behavior: 'smooth'})},
+  {label: 'Отзывы', action: scrollToReviews},
   {label: 'O бренде', action: () => document.getElementById('brand')?.scrollIntoView({behavior: 'smooth'})}
 ]
+
+function scrollToReviews() {
+  if (route.path.startsWith('/cream/')) {
+    // на странице продукта
+    const el = document.getElementById('rating-reviews')
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  } else if (route.path === '/') {
+    // на главной странице
+    const el = document.getElementById('reviews')
+    if (el) el.scrollIntoView({behavior: 'smooth'})
+  } else {
+    // если на другой странице — переходим на главную, а потом скроллим
+    router.push('/').then(() => {
+      setTimeout(() => {
+        const el = document.getElementById('reviews')
+        if (el) el.scrollIntoView({behavior: 'smooth'})
+      }, 300)
+    })
+  }
+}
 
 function goToCatalog() {
   if (route.path === '/') {
@@ -66,31 +86,22 @@ defineProps({
 
     @include vp-767 {
       display: flex;
-      position: absolute;
-      width: 50%;
-      flex-direction: column;
-      gap: 15px 0;
-      right: 0;
-      top: 66px;
-      text-align: right;
-      height: 400px;
-      padding: 30px 0;
-      justify-content: center;
+      gap: 0;
     }
 
     .menu__link {
       font-size: 18px;
-      padding: 10px 64px;
+      padding: 15px 64px;
       color: var(--color-default-black);
       background-color: inherit;
       border: none;
       transition: color 0.4s, background-color 0.4s;
 
       @include vp-767 {
-        font-size: 26px;
-        color: var(--color-bright-grey);
+        font-size: 16px;
+        color: var(--color-default-black);
         text-align: end;
-        padding: 7px 15px;
+        padding: 10px 10px;
       }
 
       &:hover {
@@ -99,7 +110,8 @@ defineProps({
         background-color: var(--color-default-black);
 
         @include vp-767 {
-          color: var(--color-bright-grey);
+          color: var(--color-default-black);
+          background-color: var(--color-default-white);
         }
       }
 
@@ -120,6 +132,10 @@ defineProps({
     .menu__link {
       padding: 5px 7px;
       font-size: 16px;
+
+      @include vp-767 {
+        padding: 0 0 10px;
+      }
 
       &:hover {
         background-color: var(--color-default-white);
